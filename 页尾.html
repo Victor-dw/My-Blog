@@ -1,0 +1,259 @@
+<script type="text/javascript" language="javascript">
+ //Setting ico for cnblogs 
+var linkObject = document.createElement('link'); 
+linkObject.rel = "shortcut icon"; 
+linkObject.href = "https://pic.cnblogs.com/avatar/1534387/20190125211813.png"; 
+document.getElementsByTagName("head")[0].appendChild(linkObject);
+ </script>
+ <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"> 
+<script type="text/javascript">
+
+<div class="fixedIndexs" style="position: fixed;opacity:0.5;bottom:300px;display: none"></div>
+<script language="javascript" type="text/javascript">
+var fixedIndexs=$('.fixedIndexs');
+var hs = $('#cnblogs_post_body h2');
+function openorclose(a) {
+    $("#indexs").slideToggle("fast");
+    var text=$(a).text();
+    if(text=='[-]'){
+        $(a).text("[+]");
+        return;
+    }
+    $(a).text("[-]");
+}
+function createIndexs(){
+    var indexs_container=$('<div style="border:solid 1px #ccc; background:#CD6889;width:200px;padding:4px 10px;"></div>');
+    var indexs_controller=$('<p style="text-align:right;margin:10;"><span style="float:left;">目录<a onclick="javascript:openorclose(this);" style="cursor: pointer">[-]</a></span><a href="#top" style="text-align: right;color: #444">返回顶部</a></p>');
+    var indexs=$('<ol id="indexs" style="margin-left: 14px; padding-left: 14px; line-height: 160%; display: block;"></ol>');
+    indexs_container.append(indexs_controller).append(indexs);
+    $.each(hs,function(i,h){
+        $(h).before('<a name="index_'+i+'"></a>');
+        indexs.append('<li style="list-style:decimal"><a href="#index_'+i+'" id="active_'+i+'">'+$(h).text()+'</a></li>');
+    });
+    if(hs.length!=0){
+        fixedIndexs.append(indexs_container);
+        //get home div right offset
+        fixedIndexs.css('right',30+'px');
+    }
+}
+createIndexs();
+fixedIndexs.hide();
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="http://files.cnblogs.com/files/flipped/prettify.js"></script>
+<script type="text/javascript">
+(function() {
+     $("pre").addClass("prettyprint");
+     prettyPrint();
+})();
+</script>
+
+
+<a href="https://github.com/Victor-dw">
+<img style="position: absolute; top: 0; left: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_left_darkblue_121621.png" alt="Fork me on GitHub">
+</a>
+
+
+
+
+
+
+<script>
+ 
+!function(){
+ 
+ function n(n,e,t){
+ 
+ return n.getAttribute(e)||t
+ 
+ }
+ 
+ function e(n){
+ 
+ return document.getElementsByTagName(n)
+ 
+ }
+ 
+ function t(){
+ 
+ var t=e("script"),o=t.length,i=t[o-1];
+ 
+ return{
+ 
+ l:o,z:n(i,"zIndex",-1),o:n(i,"opacity",.5),c:n(i,"color","0,0,0"),n:n(i,"count",99)
+ 
+ }
+ 
+ }
+ 
+ function o(){
+ 
+ a=m.width=window.innerWidth||document.documentElement.clientWidth||document.body.clientWidth,
+ 
+ c=m.height=window.innerHeight||document.documentElement.clientHeight||document.body.clientHeight
+ 
+ }
+ 
+ function i(){
+ 
+ r.clearRect(0,0,a,c);
+ 
+ var n,e,t,o,m,l;
+ 
+ s.forEach(function(i,x){
+ 
+ for(i.x+=i.xa,i.y+=i.ya,i.xa*=i.x>a||i.x<0?-1:1,i.ya*=i.y>c||i.y<0?-1:1,r.fillRect(i.x-.5,i.y-.5,1,1),e=x+1;e<u.length;e++)n=u[e],
+ 
+ null!==n.x&&null!==n.y&&(o=i.x-n.x,m=i.y-n.y,
+ 
+ l=o*o+m*m,l<n.max&&(n===y&&l>=n.max/2&&(i.x-=.03*o,i.y-=.03*m),
+ 
+ t=(n.max-l)/n.max,r.beginPath(),r.lineWidth=t/2,r.strokeStyle="rgba("+d.c+","+(t+.2)+")",r.moveTo(i.x,i.y),r.lineTo(n.x,n.y),r.stroke()))
+ 
+ }),
+
+ x(i)
+ 
+ }
+ 
+ var a,c,u,m=document.createElement("canvas"),
+ 
+ d=t(),l="c_n"+d.l,r=m.getContext("2d"),
+x=window.requestAnimationFrame||window.webkitRequestAnimationFrame||window.mozRequestAnimationFrame||window.oRequestAnimationFrame||window.msRequestAnimationFrame||
+ 
+ function(n){
+
+ window.setTimeout(n,1e3/45)
+ 
+ },
+ 
+ w=Math.random,y={x:null,y:null,max:2e4};m.id=l,m.style.cssText="position:fixed;top:0;left:0;z-index:"+d.z+";opacity:"+d.o,e("body")[0].appendChild(m),o(),window.onresize=o,
+ 
+ window.onmousemove=function(n){
+ 
+ n=n||window.event,y.x=n.clientX,y.y=n.clientY
+ 
+ },
+ 
+ window.onmouseout=function(){
+ 
+ y.x=null,y.y=null
+ 
+ };
+ 
+ for(var s=[],f=0;d.n>f;f++){
+ 
+ var h=w()*a,g=w()*c,v=2*w()-1,p=2*w()-1;s.push({x:h,y:g,xa:v,ya:p,max:6e3})
+ 
+ }
+ 
+ u=s.concat([y]),
+ 
+ setTimeout(function(){i()},100)
+ 
+ }();
+ 
+ </script>
+
+
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Live2D</title>
+     
+    <link rel="stylesheet" type="text/css" href="https://blog-static.cnblogs.com/files/DWVictor/waifu.css"/>
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<body>
+    <link rel="stylesheet" type="text/css" href="https://blog-static.cnblogs.com/files/DWVictor/waifu.css">
+    <div class="waifu" id="waifu">
+        <div class="waifu-tips" style="opacity: 1;"></div>
+        <canvas id="live2d" width="280" height="200" class="live2d"></canvas>
+        <div class="waifu-tool">
+            <span class="fui-home"></span>
+            <span class="fui-chat"></span>
+            <span class="fui-eye"></span>
+            <span class="fui-user"></span>
+            <span class="fui-photo"></span>
+            <span class="fui-info-circle"></span>
+            <span class="fui-cross"></span>
+        </div>
+    </div>
+    <script src="https://blog-static.cnblogs.com/files/DWVictor/live2d.js"></script>
+    <script src="https://blog-static.cnblogs.com/files/DWVictor/waifu-tips.js"></script>
+    <script type="text/javascript">initModel()</script>
+</body>
+</html>
+<link rel="stylesheet" type="text/css" href="https://files.cnblogs.com/files/yjlblog/flat-ui.min.css"/>
+
+
+
+
+
+<script language="javascript" type="text/javascript">
+// 生成目录索引列表
+// ref: http://www.cnblogs.com/wangqiguo/p/4355032.html
+// modified by: zzq
+function GenerateContentList()
+{
+    var mainContent = $('#cnblogs_post_body');
+    var h2_list = $('#cnblogs_post_body h2');//如果你的章节标题不是h2,只需要将这里的h2换掉即可
+
+    if(mainContent.length < 1)
+        return;
+ 
+    if(h2_list.length>0)
+    {
+        var content = '<a name="_labelTop"></a>';
+        content += '<div id="navCategory" style="color:#152e97;">';
+        content += '<p style="font-size:18px;"><b>目录</b></p>';
+        content += '<ul>';
+        for(var i=0; i<h2_list.length; i++)
+        {
+            var go_to_top = '<div style="text-align: right;"><a href="#_labelTop" style="color:#f68a33">回到顶部</a><a name="_label' + i + '"></a></div>';
+            $(h2_list[i]).before(go_to_top);
+            
+            var h3_list = $(h2_list[i]).nextAll("h3");
+            var li3_content = '';
+            for(var j=0; j<h3_list.length; j++)
+            {
+                var tmp = $(h3_list[j]).prevAll('h2').first();
+                if(!tmp.is(h2_list[i]))
+                    break;
+                var li3_anchor = '<a name="_label' + i + '_' + j + '"></a>';
+                $(h3_list[j]).before(li3_anchor);
+                li3_content += '<li><a href="#_label' + i + '_' + j + '">' + $(h3_list[j]).text() + '</a></li>';
+            }
+            
+            var li2_content = '';
+            if(li3_content.length > 0)
+                li2_content = '<li><a href="#_label' + i + '">' + $(h2_list[i]).text() + '</a><ul>' + li3_content + '</ul></li>';
+            else
+                li2_content = '<li><a href="#_label' + i + '">' + $(h2_list[i]).text() + '</a></li>';
+            content += li2_content;
+        }
+        content += '</ul>';
+        content += '</div><p>&nbsp;</p>';
+        content += '<hr style="height:1px;border:none;border-top:1px dashed #0066CC;"/>';
+        if($('#cnblogs_post_body').length != 0 )
+        {
+            $($('#cnblogs_post_body')[0]).prepend(content);
+        }
+    }   
+}
+
+GenerateContentList();
+</script>

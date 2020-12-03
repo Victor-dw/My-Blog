@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<img src="http://i0.hdslb.com/bfs/active/b9c0a8b257c1b5f98433ce68f8e51613ba6a8cca.gif" style="position: relative;float: right;bottom: 15px;">
+<style>
+#nav { width:150px; height: 400px; border: 1px solid #D4CD49; position:fixed;left:0;top:30% }
+</style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<style>
+#back-top {
+     position: fixed;
+     bottom: 10px;
+     right: 5px;
+     z-index: 99;
+}
+#back-top span {
+     width: 50px;
+     height: 64px;
+     display: block;
+     background:url(http://images.cnblogs.com/cnblogs_com/seanshao/855033/o_rocket.png) no-repeat center center;
+}
+#back-top a{outline:none}
+</style>
+
+
+<script type="text/javascript">
+$(function() {
+	// hide #back-top first
+	$("#back-top").hide();
+	// fade in #back-top
+	$(window).scroll(function() {
+		if ($(this).scrollTop() > 500) {
+			$('#back-top').fadeIn();
+		} else {
+			$('#back-top').fadeOut();
+		}
+	});
+	// scroll body to 0px on click
+	$('#back-top a').click(function() {
+		$('body,html').animate({
+			scrollTop: 0
+		}, 800);
+		return false;
+	});
+});
+</script>
+<p id="back-top" style="display:none"><a href="#top"><span></span></a></p>
+
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+/*
+    功能：生成博客目录的JS工具
+    测试：IE8，火狐，google测试通过
+    孤傲苍狼
+    2014-5-11
+*/
+var BlogDirectory = {
+    /*
+        获取元素位置，距浏览器左边界的距离（left）和距浏览器上边界的距离（top）
+    */
+    getElementPosition:function (ele) {        
+        var topPosition = 0;
+        var leftPosition = 0;
+        while (ele){              
+            topPosition += ele.offsetTop;
+            leftPosition += ele.offsetLeft;        
+            ele = ele.offsetParent;     
+        }  
+        return {top:topPosition, left:leftPosition}; 
+    },
+
+    /*
+    获取滚动条当前位置
+    */
+    getScrollBarPosition:function () {
+        var scrollBarPosition = document.body.scrollTop || document.documentElement.scrollTop;
+        return  scrollBarPosition;
+    },
+    
+    /*
+    移动滚动条，finalPos 为目的位置，internal 为移动速度
+    */
+    moveScrollBar:function(finalpos, interval) {
+
+        //若不支持此方法，则退出
+        if(!window.scrollTo) {
+            return false;
+        }
+
+        //窗体滚动时，禁用鼠标滚轮
+        window.onmousewheel = function(){
+            return false;
+        };
+          
+        //清除计时
+        if (document.body.movement) { 
+            clearTimeout(document.body.movement); 
+        } 
+
+        var currentpos =BlogDirectory.getScrollBarPosition();//获取滚动条当前位置
+
+        var dist = 0; 
+        if (currentpos == finalpos) {//到达预定位置，则解禁鼠标滚轮，并退出
+            window.onmousewheel = function(){
+                return true;
+            }
+            return true; 
+        } 
+        if (currentpos < finalpos) {//未到达，则计算下一步所要移动的距离
+            dist = Math.ceil((finalpos - currentpos)/10); 
+            currentpos += dist; 
+        } 
+        if (currentpos > finalpos) { 
+            dist = Math.ceil((currentpos - finalpos)/10); 
+            currentpos -= dist; 
+        }
+        
+        var scrTop = BlogDirectory.getScrollBarPosition();//获取滚动条当前位置
+        window.scrollTo(0, currentpos);//移动窗口
+        if(BlogDirectory.getScrollBarPosition() == scrTop)//若已到底部，则解禁鼠标滚轮，并退出
+        {
+            window.onmousewheel = function(){
+                return true;
+            }
+            return true;
+        }
+        
+        //进行下一步移动
+        var repeat = "BlogDirectory.moveScrollBar(" + finalpos + "," + interval + ")"; 
+        document.body.movement = setTimeout(repeat, interval); 
+    },
+    
+    htmlDecode:function (text){
+        var temp = document.createElement("div");
+        temp.innerHTML = text;
+        var output = temp.innerText || temp.textContent;
+        temp = null;
+        return output;
+    },
+
+    /*
+    创建博客目录，
+    id表示包含博文正文的 div 容器的 id，
+    mt 和 st 分别表示主标题和次级标题的标签名称（如 H2、H3，大写或小写都可以！），
+    interval 表示移动的速度
+    */
+    createBlogDirectory:function (id, mt, st, interval){
+         //获取博文正文div容器
+        var elem = document.getElementById(id);
+        if(!elem) return false;
+        //获取div中所有元素结点
+        var nodes = elem.getElementsByTagName("*");
+        //创建博客目录的div容器
+        var divSideBar = document.createElement('DIV');
+        divSideBar.className = 'uprightsideBar';
+        divSideBar.setAttribute('id', 'uprightsideBar');
+        var divSideBarTab = document.createElement('DIV');
+        divSideBarTab.setAttribute('id', 'sideBarTab');
+        divSideBar.appendChild(divSideBarTab);
+        var h2 = document.createElement('H2');
+        divSideBarTab.appendChild(h2);
+        var txt = document.createTextNode('目录导航');
+        h2.appendChild(txt);
+        var divSideBarContents = document.createElement('DIV');
+        divSideBarContents.style.display = 'none';
+        divSideBarContents.setAttribute('id', 'sideBarContents');
+        divSideBar.appendChild(divSideBarContents);
+        //创建自定义列表
+        var dlist = document.createElement("dl");
+        divSideBarContents.appendChild(dlist);
+        var num = 0;//统计找到的mt和st
+        mt = mt.toUpperCase();//转化成大写
+        st = st.toUpperCase();//转化成大写
+        //遍历所有元素结点
+        for(var i=0; i<nodes.length; i++)
+        {
+            if(nodes[i].nodeName == mt|| nodes[i].nodeName == st)    
+            {
+                //获取标题文本
+                var nodetext = nodes[i].innerHTML.replace(/<\/?[^>]+>/g,"");//innerHTML里面的内容可能有HTML标签，所以用正则表达式去除HTML的标签
+                nodetext = nodetext.replace(/ /ig, "");//替换掉所有的 
+                nodetext = BlogDirectory.htmlDecode(nodetext);
+                //插入锚        
+                nodes[i].setAttribute("id", "blogTitle" + num);
+                var item;
+                switch(nodes[i].nodeName)
+                {
+                    case mt:    //若为主标题 
+                        item = document.createElement("dt");
+                        break;
+                    case st:    //若为子标题
+                        item = document.createElement("dd");
+                        break;
+                }
+                
+                //创建锚链接
+                var itemtext = document.createTextNode(nodetext);
+                item.appendChild(itemtext);
+                item.setAttribute("name", num);
+                item.onclick = function(){        //添加鼠标点击触发函数
+                    var pos = BlogDirectory.getElementPosition(document.getElementById("blogTitle" + this.getAttribute("name")));
+                    if(!BlogDirectory.moveScrollBar(pos.top, interval)) return false;
+                };            
+                
+                //将自定义表项加入自定义列表中
+                dlist.appendChild(item);
+                num++;
+            }
+        }
+        
+        if(num == 0) return false; 
+        /*鼠标进入时的事件处理*/
+        divSideBarTab.onmouseenter = function(){
+            divSideBarContents.style.display = 'block';
+        }
+        /*鼠标离开时的事件处理*/
+        divSideBar.onmouseleave = function() {
+            divSideBarContents.style.display = 'none';
+        }
+
+        document.body.appendChild(divSideBar);
+    }
+    
+};
+
+window.onload=function(){
+    /*页面加载完成之后生成博客目录*/
+    BlogDirectory.createBlogDirectory("cnblogs_post_body","h2","h3",20);
+}
+</script>
+
+
+
+
+<script>
+function GetRandomNum(Min,Max){
+    var Range=Max-Min;
+    var Rand=Math.random();
+    return(Min+Math.round(Rand * Range));
+}
+function ShowTab(){
+    x=document.getElementById("MagicArray");
+    if (x.style.width=="200px"){
+        x.style.width="0px";
+        x.style.height="0px";
+        x.style.bottom="100px";
+        x.style.right="100px";
+        x.style.transform="rotate(0deg)";
+    }else{
+        x.style.width="200px";
+        x.style.height="200px";
+        x.style.bottom="0px";
+        x.style.right="0px";
+        x.style.transform="rotate(180deg)";
+    }
+    
+    y=document.getElementsByName("Tab");
+    for (var i=0;i<y.length;i++){
+        x=y[i];
+        if (x.style.fontSize=="15px"){
+            x.style.fontSize="0px";
+            x.style.transitionDelay="0s";
+        }else{
+            x.style.fontSize="15px";
+            x.style.transitionDelay="0.8s";
+        }
+    }
+}
+function ShowPicture(){
+    x=document.getElementById("main");
+    x.style.opacity=0.9-x.style.opacity;
+}
+function ChangePicture(){
+    x=document.body;
+    y=GetRandomNum(0,14);
+    if (y==0){
+        x.style.background="url(https://img2018.cnblogs.com/blog/1534387/201908/1534387-20190811001638640-2010579868.png) no-repeat fixed";
+        x.style.backgroundSize="cover";
+    }else if (y==1){
+        x.style.background="url(http://images2015.cnblogs.com/blog/841250/201704/841250-20170409090749785-323228483.jpg) no-repeat fixed";
+        x.style.backgroundSize="cover";
+    }else if (y==2){
+        x.style.background="url(http://images2015.cnblogs.com/blog/841250/201705/841250-20170505174023882-274298407.jpg) no-repeat fixed";
+        x.style.backgroundSize="cover";
+    }else if (y==3){
+        x.style.background="url(http://images2015.cnblogs.com/blog/841250/201705/841250-20170505174051757-1191896358.jpg) no-repeat fixed";
+        x.style.backgroundSize="cover";
+    }else if (y==4){
+        x.style.background="url(http://images2015.cnblogs.com/blog/841250/201705/841250-20170505174129773-2085975677.jpg) no-repeat fixed";
+        x.style.backgroundSize="cover";
+    }else if (y==5){
+        x.style.background="url(http://images2015.cnblogs.com/blog/841250/201706/841250-20170604142640446-727563678.png) no-repeat fixed";
+        x.style.backgroundSize="cover";
+    }else if (y==6){
+        x.style.background="url(http://images2015.cnblogs.com/blog/841250/201706/841250-20170611202111434-1989193791.jpg) no-repeat fixed";
+        x.style.backgroundSize="cover";
+    }else if (y==7){
+        x.style.background="url(http://images2015.cnblogs.com/blog/841250/201706/841250-20170611202419872-817092701.png) no-repeat fixed";
+        x.style.backgroundSize="cover";
+    }else if (y==8){
+        x.style.background="url(http://images2017.cnblogs.com/blog/841250/201709/841250-20170902151832593-2122003193.jpg) no-repeat fixed";
+        x.style.backgroundSize="cover";
+    }else if (y==9){
+        x.style.background="url(http://images2017.cnblogs.com/blog/841250/201709/841250-20170902152019140-1762402367.jpg) no-repeat fixed";
+        x.style.backgroundSize="cover";
+    }else if (y==10){
+        x.style.background="url(http://images2017.cnblogs.com/blog/841250/201709/841250-20170902152127562-2119838736.jpg) no-repeat fixed";
+        x.style.backgroundSize="cover";
+    }else if (y==11){
+        x.style.background="url(http://images2017.cnblogs.com/blog/841250/201709/841250-20170902152205765-1481629031.jpg) no-repeat fixed";
+        x.style.backgroundSize="cover";
+    }else if (y==12){
+        x.style.background="url(http://images2017.cnblogs.com/blog/841250/201709/841250-20170902152237077-878421384.jpg) no-repeat fixed";
+        x.style.backgroundSize="cover";
+    }else if (y==13){
+        x.style.background="url(http://images2017.cnblogs.com/blog/841250/201709/841250-20170902152325140-1207335922.jpg) no-repeat fixed";
+        x.style.backgroundSize="cover";
+    }else if (y==14){
+        x.style.background="url(http://images2017.cnblogs.com/blog/841250/201709/841250-20170902152342718-1503887682.jpg) no-repeat fixed";
+        x.style.backgroundSize="cover";
+    }
+}
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<div class="head_img"><img width="160" height="160" alt="我的头像" src="https://i.loli.net/2017/08/02/598187babf39e.gif" class="img_avatar">
+
+
+<style>
+    /*实现立体效果*/
+    .img {
+        width: 50px;
+        height: 50px;
+        margin: 0 auto;
+        transform-style: preserve-3d;
+        /*设置动画播放样式:动画对象 播放速度 时间 播放次数*/
+        animation: rotate linear 20s infinite;
+    }
+    /*实现动画效果*/
+    @-webkit-keyframes rotate {                /*sofari chrome*/
+        from {
+            transform: rotateX(0deg) rotateY(0deg);
+        }
+        to {
+            transform: rotateX(360deg) rotateY(360deg);
+        }
+    }
+    /*图片样式*/
+    .pic{
+        width: 200px;
+        height: 200px;
+        transform: rotateY(0deg) translateZ(100px);
+    }
+</style>
+<div class="wrap">
+    <!--部署内外层图片-->
+    <div class="cube">
+        <!--前面图片 -->
+        <div class="out_front">
+            <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1553678403567&di=9de5989f2fa2efd6e80477ad19d995dc&imgtype=0&src=http%3A%2F%2Fattach.bbs.miui.com%2Fforum%2F201811%2F19%2F072123rjmrmsjnuv3msepw.jpeg" class="pic">
+        </div>
+        <!--后面图片 -->
+        <div class="out_back">
+            <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1553678403566&di=48a1fd857ad0d132da2688392d22e437&imgtype=0&src=http%3A%2F%2Fi0.hdslb.com%2Fbfs%2Farticle%2Fa08ea9b71f481add983166f99c8552a74b8fe9d0.jpg" class="pic">
+        </div>
+        <!--左面图片 -->
+        <div class="out_left">
+            <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1553678403565&di=aa0eecb27e2a362d3ed5a37fd54b0fdb&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201406%2F12%2F20140612203422_YWGYQ.jpeg" class="pic">
+        </div>
+        <!--右面图片 -->
+        <div class="out_right">
+            <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1553678403565&di=8270b43535f2d4dbd97e03adffe0bb7f&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201406%2F12%2F20140612193057_JYL2m.thumb.700_0.jpeg" class="pic">
+        </div>
+        <!--上面图片 -->
+        <div class="out_top">
+            <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1553678403564&di=7c6f066b3151993f1319707ff9622775&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201406%2F15%2F20140615122443_jiYKQ.jpeg" class="pic">
+        </div>
+        <!--下面图片 -->
+        <div class="out_bottom">
+            <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1553678403563&di=ebfbd4c855b6a6ebf803a3f9fad9754f&imgtype=0&src=http%3A%2F%2Fi0.hdslb.com%2Fbfs%2Farticle%2F8b344b9bf5c7219460ceb70dcbb19484f2862a2f.png" class="pic">
+        </div>
+
+        <!--小正方体 -->
+        <span class="in_front">
+                <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1553678403563&di=2aa513aa9e7a7c038639c1e70d08fc32&imgtype=0&src=http%3A%2F%2Fimgq.duitang.com%2Fuploads%2Fitem%2F201406%2F12%2F20140612201307_nhCHG.jpeg" class="in_pic">
+            </span>
+        <span class="in_back">
+                 <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1553678403562&di=e0ec2c8307b757a1c89af7876825ce18&imgtype=0&src=http%3A%2F%2Fimg5.duitang.com%2Fuploads%2Fitem%2F201406%2F14%2F20140614142843_tYFP3.thumb.700_0.jpeg" class="in_pic">
+            </span>
+        <span class="in_left">
+                <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1553678403560&di=8592a34c2e3d94680840d9f9b532f27c&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201406%2F14%2F20140614142944_wcRkS.png" class="in_pic">
+            </span>
+        <span class="in_right">
+                <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1553678403555&di=261086b6625f1b954ec176cf0684880a&imgtype=0&src=http%3A%2F%2Fi0.hdslb.com%2Fbfs%2Farticle%2F920df50533d2408c87066ef560a851f4846f19e5.jpg" class="in_pic">
+            </span>
+        <span class="in_top">
+                <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1553678403553&di=47beea55736f531a56b117d091d14253&imgtype=0&src=http%3A%2F%2Fi0.hdslb.com%2Fbfs%2Farticle%2Ff5f4164deeda7b3624644bdf98ca5e7216770c27.jpg" class="in_pic">
+            </span>
+        <span class="in_bottom">
+                <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1553678403552&di=a260e79961f1f8c3b25068fcba055686&imgtype=0&src=http%3A%2F%2Fi0.hdslb.com%2Fbfs%2Farticle%2Fb7476da2e60a23865c3bc70ffd619ed81767081b.jpg" class="in_pic">
+            </span>
+
+    </div>
+    <style>
+        /*最外层容器样式*/
+        .wrap {
+            width: 100px;
+            height: 100px;
+            margin: 150px;
+            position: relative;
+        }
+
+        /*得到立方体效果*/
+        .cube {
+            width: 50px;
+            height: 50px;
+            margin: 0 auto;
+            transform-style: preserve-3d;
+            /*设置动画播放样式:动画对象 播放速度 时间 播放次数*/
+            animation: rotate linear 20s infinite;
+        }
+
+        /*动画旋转的方式*/
+        /*得到动画效果*/
+        @-moz-keyframes rotate {                     /*firefox*/
+            from {
+                transform: rotateX(0deg) rotateY(0deg);
+            }
+            to {
+                transform: rotateX(360deg) rotateY(360deg);
+            }
+        }
+        @-webkit-keyframes rotate {                /*sofari chrome*/
+            from {
+                transform: rotateX(0deg) rotateY(0deg);
+            }
+            to {
+                transform: rotateX(360deg) rotateY(360deg);
+            }
+        }
+        @-o-keyframes rotate {                    /*opera*/
+            from {
+                transform: rotateX(0deg) rotateY(0deg);
+            }
+            to {
+                transform: rotateX(360deg) rotateY(360deg);
+            }
+        }
+        /*每张图片的样式*/
+        .cube div {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            opacity: 0.8;
+            /*过渡效果*/
+            transition: all .4s;
+        }
+
+        /*定义所有图片样式*/
+        .pic {
+            width: 200px;
+            height: 200px;
+        }
+
+        .cube .out_front {
+            transform: rotateY(0deg) translateZ(100px);
+        }
+
+        .cube .out_back {
+            transform: translateZ(-100px) rotateY(180deg);
+        }
+
+        .cube .out_left {
+            transform: rotateY(-90deg) translateZ(100px);
+        }
+
+        .cube .out_right {
+            transform: rotateY(90deg) translateZ(100px);
+        }
+
+        .cube .out_top {
+            transform: rotateX(90deg) translateZ(100px);
+        }
+
+        .cube .out_bottom {
+            transform: rotateX(-90deg) translateZ(100px);
+        }
+
+        /*定义小正方体样式*/
+        .cube span {
+            display: block;
+            width: 100px;
+            height: 100px;
+            position: absolute;
+            top: 50px;
+            left: 50px;
+        }
+
+        .cube .in_pic {
+            width: 100px;
+            height: 100px;
+        }
+
+        .cube .in_front {
+            transform: rotateY(0deg) translateZ(50px);
+        }
+
+        .cube .in_back {
+            transform: translateZ(-50px) rotateY(180deg);
+        }
+
+        .cube .in_left {
+            transform: rotateY(-90deg) translateZ(50px);
+        }
+
+        .cube .in_right {
+            transform: rotateY(90deg) translateZ(50px);
+        }
+
+        .cube .in_top {
+            transform: rotateX(90deg) translateZ(50px);
+        }
+
+        .cube .in_bottom {
+            transform: rotateX(-90deg) translateZ(50px);
+        }
+
+        /*鼠标移入后样式*/
+        .cube:hover .out_front {
+            transform: rotateY(0deg) translateZ(200px);
+        }
+
+        .cube:hover .out_back {
+            transform: translateZ(-200px) rotateY(180deg);
+        }
+
+        .cube:hover .out_left {
+            transform: rotateY(-90deg) translateZ(200px);
+        }
+
+        .cube:hover .out_right {
+            transform: rotateY(90deg) translateZ(200px);
+        }
+
+        .cube:hover .out_top {
+            transform: rotateX(90deg) translateZ(200px);
+        }
+
+        .cube:hover .out_bottom {
+            transform: rotateX(-90deg) translateZ(200px);
+        }
+    </style>
+</div>
+
+
+
+
+
+
+<p>做题做得心累的时候</p>
+<p>就看看背景吧</p>
+<p>蒟蒻一枚，有事您Q我～</p>
+<p>CSUST的一个挣扎的ACMer</p>
+<p>我的QQ在这哦！3195397218～</p>
+<p>我的微信在这哦！Dwvictor【加好友请注明姓名和来源哦，谢谢各位支持^-^】～</p>
+<p>喵~允许我卖一个萌~~~~</p>
+<p>热爱交友！orz</p>
+<p>希望大家多多支持，觉得文章好可以点个赞，动动你的鼠标加下关注哦</p>
+<p>非常乐意互换友链呐，~o( =∩ω∩= )喵~~~~</p>
+<p>有事您Q我，我一直在哦~：</p><a target="_blank" href="http://wpa.qq.com/msgrd?v=3&amp;uin=3195397218&amp;site=qq&amp;menu=yes">
+　　<img align="absmiddle" border="0" src="http://wpa.qq.com/pa?p=2:873284962:41 &amp;r=0.30709030851721764" alt="欢迎与我联系" title="欢迎与我联系">
+
+</a>
+
+<script charset="Shift_JIS" src="http://chabudai.sakura.ne.jp/blogparts/honehoneclock/honehone_clock_tr.js"></script>
+
+<object type="application/x-shockwave-flash" style="outline:none;" data="http://cdn.abowman.com/widgets/hamster/hamster.swf?" width="150" height="160"><param name="movie" value="http://cdn.abowman.com/widgets/hamster/hamster.swf?"></param><param name="AllowScriptAccess" value="always"></param><param name="wmode" value="opaque"></param></object>
+
+<p>我的访客量统计：Start From 2018.10.29 19:00</p>
+<div align="center"><a href="http://www.amazingcounters.com"><img border="0" src="http://cc.amazingcounters.com/counter.php?i=3214944&c=9645145" alt="AmazingCounters.com"></a></div>
+<a href="http://info.flagcounter.com/G05j"><img src="http://s07.flagcounter.com/count/G05j/bg_FFFFFF/txt_000000/border_CCCCCC/columns_2/maxflags_250/viewers_0/labels_1/pageviews_1/flags_0/percent_0/" alt="Flag Counter" border="0"></a>
+
+<!-- Your XlchPlayerKey -->
+<script>XlchKey="d9zz3e6DHX";</script>
+<!-- font-awesome 4.2.0 -->
+<link href="http://lib.baomitu.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+<!-- JQuery 2.2.4 -->
+<script src="http://lib.baomitu.com/jquery/2.2.4/jquery.min.js"></script>
+<!-- JQuery-mousewheel 3.1.9 -->
+<script src="http://lib.baomitu.com/jquery-mousewheel/3.1.9/jquery.mousewheel.min.js"></script>
+<!-- Scrollbar -->
+<script src="http://static.badapple.top/BadApplePlayer/js/scrollbar.js"></script>
+<!-- BadApplePlayer -->
+<script src="http://static.badapple.top/BadApplePlayer/Player.js"></script>
+</body>
+</html>
+
+/*
+<div class="head_img"><img width="160" height="160" alt="我的头像" src="http://m.5577.com/up/2019-2/15501113468430433.jpg" class="img_avatar"><div>
+*/
